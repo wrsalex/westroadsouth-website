@@ -36,4 +36,4 @@ See [`DESIGN.md`](./DESIGN.md). Extracted from the existing westroadsouth.com br
 
 ## Contact
 
-alex@westroadsouth.com
+hello@westroadsouth.com

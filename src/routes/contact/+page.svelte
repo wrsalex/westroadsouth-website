@@ -56,7 +56,11 @@
         <div class="space-y-6">
           <div>
             <h3 class="text-sm font-semibold text-wrs-ink uppercase tracking-wider mb-2">Email</h3>
-            <a href="mailto:alex@westroadsouth.com" class="text-wrs-pink hover:underline">alex@westroadsouth.com</a>
+            <a href="mailto:hello@westroadsouth.com" class="text-wrs-pink hover:underline">hello@westroadsouth.com</a>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-wrs-ink uppercase tracking-wider mb-2">Company</h3>
+            <p class="text-wrs-gray text-sm">WestRoadSouth Limited</p>
           </div>
           <div>
             <h3 class="text-sm font-semibold text-wrs-ink uppercase tracking-wider mb-2">Location</h3>
