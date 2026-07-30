@@ -1,36 +1,34 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @layer base {
   :root {
-    --wrs-navy: #0A1628;
-    --wrs-navy-light: #132240;
-    --wrs-gold: #C9A94E;
-    --wrs-gold-dim: rgba(201, 169, 78, 0.15);
-    --wrs-cream: #F5F0E8;
-    --wrs-cream-muted: rgba(245, 240, 232, 0.65);
-    --wrs-cream-dim: rgba(245, 240, 232, 0.35);
-    --wrs-surface: #0F1D35;
-    --wrs-border: rgba(201, 169, 78, 0.12);
+    --wrs-ink: #1F1F1F;
+    --wrs-ink-dim: rgba(31, 31, 31, 0.7);
+    --wrs-pink: #E42869;
+    --wrs-pink-hover: #C71E58;
+    --wrs-white: #FFFFFF;
+    --wrs-off-white: #F7F7F7;
+    --wrs-gray: #787878;
+    --wrs-gray-light: #C5C5C5;
+    --wrs-border: #E8E8E8;
   }
 }
 
 @theme {
-  --color-wrs-navy: var(--wrs-navy);
-  --color-wrs-navy-light: var(--wrs-navy-light);
-  --color-wrs-gold: var(--wrs-gold);
-  --color-wrs-gold-dim: var(--wrs-gold-dim);
-  --color-wrs-cream: var(--wrs-cream);
-  --color-wrs-cream-muted: var(--wrs-cream-muted);
-  --color-wrs-cream-dim: var(--wrs-cream-dim);
-  --color-wrs-surface: var(--wrs-surface);
+  --color-wrs-ink: var(--wrs-ink);
+  --color-wrs-ink-dim: var(--wrs-ink-dim);
+  --color-wrs-pink: var(--wrs-pink);
+  --color-wrs-pink-hover: var(--wrs-pink-hover);
+  --color-wrs-white: var(--wrs-white);
+  --color-wrs-off-white: var(--wrs-off-white);
+  --color-wrs-gray: var(--wrs-gray);
+  --color-wrs-gray-light: var(--wrs-gray-light);
   --color-wrs-border: var(--wrs-border);
 }
 
 body {
-  background: var(--wrs-navy);
-  color: var(--wrs-cream);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--wrs-white);
+  color: var(--wrs-gray);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }

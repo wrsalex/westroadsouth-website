@@ -1,21 +1,25 @@
 # West Road South
 
-Company website for **West Road South** — the holding company behind Avion, HungryPaw, ResearchVault, and ACRN.
+**AI Agent Services Agency.** We build and deploy AI agents that automate workflows, optimize processes, and scale intelligence for businesses.
 
-## Stack
+## What We Do
+
+- **AI Agent Development** — Custom agents for workflow automation, customer interactions, real-time decisions
+- **Work Process Optimization** — Identify bottlenecks, deploy AI to streamline operations
+- **Agent-Powered Customer Service** — 24/7 conversational AI, multilingual, integrated
+- **AI Integration & Infrastructure** — Model selection, deployment, monitoring, continuous improvement
+- **Data Pipeline Automation** — Intelligent ETL with AI handling edge cases
+- **AI Strategy & Consulting** — Assessment, roadmap, phased deployment
+
+## Process
+
+Discover → Design → Deploy → Optimize. From audit to autonomous operation in four phases.
+
+## Tech
 
 - **SvelteKit** + **Svelte 5** — UI framework
 - **TailwindCSS v4** — styling
-- **Cloudflare Workers** — deployment (`adapter-static` + custom `worker.js`)
-
-## Projects
-
-| Project | Description | URL |
-|---------|-------------|-----|
-| Avion | AI companion | [avionx.ai](https://avionx.ai) |
-| HungryPaw | Pet tech platform | [hungrypaw.app](https://hungrypaw.app) |
-| ResearchVault | Research platform | [researchvault.ai](https://researchvault.ai) |
-| ACRN | Agent runtime | [acrn.ai](https://acrn.ai) |
+- **Cloudflare Workers** — hosting
 
 ## Develop
 
@@ -23,20 +27,13 @@ Company website for **West Road South** — the holding company behind Avion, Hu
 npm install
 npm run dev       # http://localhost:5173
 npm run build     # → build/
-```
-
-## Deploy
-
-```bash
 npx wrangler deploy
 ```
 
-Deploys to `westroadsouth-website.alex-1e6.workers.dev`.
-
 ## Design
 
-See [`DESIGN.md`](./DESIGN.md) for the complete visual identity. Navy + gold + cream. Dark mode only. Single accent.
+See [`DESIGN.md`](./DESIGN.md). Extracted from the existing westroadsouth.com brand: ink #1F1F1F, pink #E42869, white + off-white. Light mode, corporate B2B.
 
-## License
+## Contact
 
-Private — all rights reserved.
+alex@westroadsouth.com

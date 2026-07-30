@@ -1,84 +1,82 @@
 # West Road South — DESIGN.md
 
-Canonical visual identity for westroadsouth.com. Navy + gold + cream palette.
-Warm, credible, understated — a tech holding company, not a startup.
+Canonical visual identity for westroadsouth.com. Extracted from existing live site.
+Dark charcoal + pink accent + clean white. Corporate, credible, understated.
 
 ## Colors
 
 | Token | Hex | CSS Variable | Usage |
 |-------|-----|-------------|-------|
-| `navy` | `#0A1628` | `--wrs-navy` | Page background |
-| `navy-light` | `#132240` | `--wrs-navy-light` | Cards, hover states |
-| `gold` | `#C9A94E` | `--wrs-gold` | Primary accent, CTAs, links |
-| `gold-dim` | `rgba(201,169,78,0.15)` | `--wrs-gold-dim` | Badge backgrounds, subtle highlights |
-| `cream` | `#F5F0E8` | `--wrs-cream` | Primary text |
-| `cream-muted` | `rgba(245,240,232,0.65)` | `--wrs-cream-muted` | Secondary text, descriptions |
-| `cream-dim` | `rgba(245,240,232,0.35)` | `--wrs-cream-dim` | Tertiary text, dividers |
-| `surface` | `#0F1D35` | `--wrs-surface` | Elevated surfaces |
-| `border` | `rgba(201,169,78,0.12)` | `--wrs-border` | Borders, dividers |
+| `ink` | `#1F1F1F` | `--wrs-ink` | Headings, dark blocks, nav text |
+| `ink-dim` | `rgba(31,31,31,0.7)` | `--wrs-ink-dim` | Subtle dark overlays |
+| `pink` | `#E42869` | `--wrs-pink` | Primary accent, CTAs, links, highlights |
+| `pink-hover` | `#C71E58` | `--wrs-pink-hover` | Button hover states |
+| `white` | `#FFFFFF` | `--wrs-white` | Page background, card backgrounds |
+| `off-white` | `#F7F7F7` | `--wrs-off-white` | Alternating section backgrounds |
+| `gray` | `#787878` | `--wrs-gray` | Body text |
+| `gray-light` | `#C5C5C5` | `--wrs-gray-light` | Muted text, captions |
+| `border` | `#E8E8E8` | `--wrs-border` | Card borders, dividers |
 
 ## Typography
 
-- **Font:** Inter (system-ui fallback)
-- **Headings:** 700 weight, tight tracking (`-0.02em`)
-- **Body:** 400 weight, relaxed leading
-- **Labels:** 500 weight, uppercase, wide tracking (`0.1em`)
+- **Font:** System sans-serif stack (matches existing site)
+- **Headings:** `#1F1F1F`, bold (600-700), tight tracking
+- **Body:** `#787878`, regular (400), comfortable leading
+- **Labels/Overline:** Uppercase, `#E42869`, small, wide tracking
 
-| Scale | Size | Usage |
-|-------|------|-------|
-| `hero` | `4rem / 5rem` (md/lg) | Page title |
-| `h1` | `2.5rem` | Section headings |
-| `h2` | `1.5rem` | Card titles |
-| `body-lg` | `1.125rem` | Lead paragraphs |
-| `body` | `1rem` | Body text |
-| `label` | `0.75rem` | Badges, tags, metadata |
+| Scale | Size | Weight | Usage |
+|-------|------|--------|-------|
+| `hero` | `3.5rem` | 700 | Main hero heading |
+| `h2` | `2.25rem` | 700 | Section titles |
+| `h3` | `1.5rem` | 600 | Card/service titles |
+| `h4` | `0.875rem` | 600 | Overline/label (uppercase) |
+| `body-lg` | `1.125rem` | 400 | Lead paragraphs |
+| `body` | `0.9375rem` | 400 | Body text |
+| `small` | `0.8125rem` | 400 | Captions, metadata |
 
 ## Spacing
 
-8px baseline. Section padding: `py-24 md:py-32`. Card padding: `p-6`. Gap between grid items: `gap-6`.
+Section padding: `py-24 md:py-28`. Card padding: `p-8`. Grid gap: `gap-8`.
 
 ## Shapes
 
-- **Cards:** `rounded-2xl` (16px)
-- **Buttons:** `rounded-full` (pill)
+- **Cards:** `rounded-lg` (8px) — subtle rounding
+- **Buttons:** `rounded` (4px) — slightly rounded, not pill
 - **Badges:** `rounded-full`
-- **Inputs:** `rounded-xl` (12px)
 
 ## Components
 
 ### Hero
-Full-viewport centered layout. Gold "Coming Soon" pill badge at top. Company name in hero size. One-line description in cream-muted. Product tags as bordered pill badges.
+Full-width. Pink overline label → dark heading → gray subtext → pink CTA button. Alternates with a visual/graphic on larger screens.
 
-### Cards
-`bg-wrs-surface border border-wrs-border rounded-2xl p-6`. Hover: border brightens to `rgba(201,169,78,0.25)`.
+### Service Cards
+White cards with gray border, off-white hover. Icon/image at top, dark heading, gray description. Clean, minimal.
 
 ### CTAs
-Gold background (`bg-wrs-gold`), navy text (`text-wrs-navy`), pill shape, 700 weight. Hover: lighten to `#D4B95E`.
+Pink background (`#E42869`), white text, `rounded`, hover darkens. Secondary CTAs: pink border + pink text on white.
 
-### Product Tags
-Bordered pill badges: `border border-wrs-border bg-transparent text-wrs-cream-muted`. Subtle, not interactive.
+### Section Layout
+Alternating white and off-white (`#F7F7F7`) section backgrounds to create visual rhythm without heavy borders.
+
+### Stats/Proof Points
+Large dark numbers with gray labels. 2×2 or 1×4 grid.
+
+## Existing Site Provenance
+
+These tokens were extracted from the live westroadsouth.com (archived Feb 2026). The site was originally an eCommerce/web development agency offering Magento, Shopify, and WeChat services. The design system is preserved while the content pivots to AI agent services.
 
 ## Rules
 
 ### Do
-- Use navy as the dominant background — it's the canvas
-- Gold is the single accent — no secondary accent colors
-- Keep text hierarchy: cream → cream-muted → cream-dim
-- Inter for everything — one font, many weights
-- Dark mode only — no light mode toggle needed
+- Use pink (#E42869) as the single accent — one CTA color
+- Alternate white/off-white sections for rhythm
+- Dark headings, gray body — clear hierarchy
+- System sans-serif for everything
+- Keep it corporate and clean — this is B2B services
 
 ### Don't
-- No #FF9900 orange — that's Avion's accent, not WRS
-- No pure white text — always cream
-- No shadows — flat, border-based separation
-- No gradients — solid colors only
+- No #FF9900 orange — that's Avion's accent
+- No dark mode — the existing site is light
+- No shadows heavier than `0 1px 3px rgba(0,0,0,0.08)`
+- No gradients — flat design
 - No animations heavier than opacity transitions
-
-## Projects Under WRS
-
-- **Avion** — AI companion (avionx.ai, #F90)
-- **HungryPaw** — Pet tech platform (hungrypaw.app, Soft Rainbow)
-- **ResearchVault** — Research platform (researchvault.ai)
-- **ACRN** — Agent runtime (acrn.ai)
-
-Each project has its own visual identity. WRS is the umbrella — navy + gold.

@@ -1,4 +1,7 @@
-# West Road South Website — AGENTS.md
+# West Road South — AGENTS.md
+
+## What This Is
+Company website for West Road South — an AI agent services agency. We build and deploy AI agents that automate workflows, optimize processes, and scale intelligence for businesses.
 
 ## Stack
 - **Framework:** SvelteKit 2.x + Svelte 5
@@ -11,14 +14,25 @@
 ## Project Structure
 ```
 src/
-  app.html          — Shell HTML with Inter font
+  app.html          — Shell HTML
   app.css           — Tailwind v4 imports + WRS CSS custom properties
   routes/
-    +layout.svelte  — Root layout (navy background wrapper)
-    +page.svelte     — Landing page
+    +layout.svelte  — Root layout (white background wrapper)
+    +page.svelte     — Landing page (hero, services, process, CTA, footer)
 worker.js           — SPA-aware static file server for Cloudflare Workers
 wrangler.toml       — Worker config (ASSETS binding, nodejs_compat)
 ```
+
+## Design
+Extracted from the existing westroadsouth.com (archived 2025-2026). See `DESIGN.md` for full tokens.
+
+- **Ink:** #1F1F1F — headings, dark blocks, nav
+- **Pink:** #E42869 — single accent, CTAs, links
+- **White:** #FFFFFF — main background
+- **Off-white:** #F7F7F7 — alternating section backgrounds
+- **Gray:** #787878 — body text
+- **Light mode only** — matches existing site
+- **System sans-serif** — no custom fonts
 
 ## Build & Deploy
 
@@ -28,27 +42,20 @@ npm run build          # → build/
 npx wrangler deploy    # → westroadsouth-website.alex-1e6.workers.dev
 ```
 
-## Design Tokens
-See `DESIGN.md` for the complete WRS visual identity. Key rules:
-- Navy (#0A1628) background — dark mode only
-- Gold (#C9A94E) as single accent
-- Cream (#F5F0E8) for all text
-- No #FF9900 — that's Avion's accent
-- Inter font, no shadows, flat border-based separation
+## Adding Sections
 
-## Adding New Pages
-
-1. Create `src/routes/[slug]/+page.svelte`
-2. Follow DESIGN.md token usage (no hardcoded colors)
-3. Verify Svelte 5 syntax: `$state()`, `$props()`, `{@render children()}`, no `class:` directives
-4. Build and verify: `npm run build`
+1. Create component in `src/routes/+page.svelte` (single-page site for now)
+2. Follow DESIGN.md — no hardcoded colors
+3. Svelte 5 syntax: `$state()`, `$props()`, no `class:` directives
+4. `npm run build` to verify
 
 ## Pitfalls
 
-- **Do not use Avion's #F90.** WRS has its own gold accent.
+- **Do not use Avion's #F90.** WRS pink is #E42869.
+- **Light mode only.** No dark mode toggle — matches existing site.
 - **Tailwind v4 uses `@tailwindcss/vite` plugin**, not PostCSS config.
 - **Svelte 5: `$state()` for reactivity**, not plain `let`.
-- **No `class:` directives** — Svelte 5 dropped them.
+- **No `class:` directives** — Svelte 5 dropped them. Use template literals.
 - **`adapter-static` outputs to `build/`** — wrangler.toml must match.
 - **Cloudflare Workers, not Pages** — account only has Workers.
 - **Custom domain** requires Workers → Settings → Triggers → Custom Domains.
