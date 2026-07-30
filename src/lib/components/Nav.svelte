@@ -23,7 +23,7 @@
 <nav class={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
   <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
     <a href="/" class="text-xl font-bold text-wrs-ink tracking-tight hover:text-wrs-pink transition-colors">
-      West Road South
+      WestRoadSouth
     </a>
 
     <!-- Desktop nav -->

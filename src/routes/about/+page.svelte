@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>About — West Road South</title>
+  <title>About — WestRoadSouth</title>
 </svelte:head>
 
 <section class="py-24 md:py-32 px-6 bg-wrs-off-white">
@@ -16,7 +16,7 @@
     <ScrollReveal delay={150}>
       <div class="prose prose-lg max-w-none text-wrs-gray leading-relaxed space-y-6">
         <p>
-          West Road South was founded in 2014 as a technology consultancy. Over the past decade, we've delivered over 200 projects — from eCommerce platforms processing millions in transactions to enterprise data pipelines handling billions of records.
+          WestRoadSouth was founded in 2014 as a technology consultancy. Over the past decade, we've delivered over 200 projects — from eCommerce platforms processing millions in transactions to enterprise data pipelines handling billions of records.
         </p>
         <p>
           When large language models emerged, we didn't chase the hype. We methodically integrated AI into the workflows we already understood — automating the tedious, augmenting the complex, and measuring everything against real business metrics.

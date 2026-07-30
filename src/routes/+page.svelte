@@ -1,5 +1,7 @@
 <script>
   import ScrollReveal from '$lib/components/ScrollReveal.svelte';
+  import HeroAnimation from '$lib/components/HeroAnimation.svelte';
+  import StatCounter from '$lib/components/StatCounter.svelte';
 
   let services = [
     {
@@ -20,22 +22,24 @@
   ];
 
   let stats = [
-    { value: '50+', label: 'AI Agents Deployed', suffix: 'in production across industries' },
-    { value: '12+', label: 'Years in Business', suffix: 'delivering enterprise solutions' },
-    { value: '200+', label: 'Projects Delivered', suffix: 'across APAC and global markets' },
-    { value: '98%', label: 'Client Retention', suffix: 'partnerships, not transactions' }
+    { value: 50, suffix: '+', label: 'AI Agents Deployed', sub: 'in production across industries' },
+    { value: 12, suffix: '+', label: 'Years in Business', sub: 'delivering enterprise solutions' },
+    { value: 200, suffix: '+', label: 'Projects Delivered', sub: 'across APAC and global markets' },
+    { value: 98, suffix: '%', label: 'Client Retention', sub: 'partnerships, not transactions' }
   ];
 
   let trustLogos = ['Enterprise', 'SME', 'Startup', 'Gov', 'Finance'];
 </script>
 
-<!-- Hero -->
-<section class="relative overflow-hidden">
-  <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
-    <svg width="100%" height="100%"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1F1F1F" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
-  </div>
+<svelte:head>
+  <title>WestRoadSouth — AI Agent Services</title>
+</svelte:head>
 
-  <div class="max-w-6xl mx-auto px-6 py-28 md:py-40 relative">
+<!-- Hero -->
+<section class="relative overflow-hidden bg-wrs-white">
+  <HeroAnimation />
+
+  <div class="max-w-6xl mx-auto px-6 py-28 md:py-40 relative z-10">
     <div class="max-w-3xl">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wrs-pink/20 bg-wrs-pink/5 text-wrs-pink text-xs font-semibold uppercase tracking-widest mb-8">
         <span class="w-2 h-2 rounded-full bg-wrs-pink animate-pulse"></span>
@@ -83,9 +87,11 @@
       {#each stats as stat, i}
         <ScrollReveal delay={i * 100}>
           <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-wrs-ink mb-2">{stat.value}</div>
+            <div class="text-4xl md:text-5xl font-bold text-wrs-ink mb-2">
+              <StatCounter target={stat.value} suffix={stat.suffix} />
+            </div>
             <div class="text-sm font-semibold text-wrs-ink mb-1">{stat.label}</div>
-            <div class="text-xs text-wrs-gray-light">{stat.suffix}</div>
+            <div class="text-xs text-wrs-gray-light">{stat.sub}</div>
           </div>
         </ScrollReveal>
       {/each}
@@ -128,17 +134,29 @@
 </section>
 
 <!-- CTA -->
-<section class="py-24 md:py-32 px-6 bg-wrs-ink">
-  <div class="max-w-3xl mx-auto text-center">
+<section class="py-24 md:py-32 px-6 bg-wrs-ink relative overflow-hidden">
+  <!-- Subtle animated background -->
+  <div class="absolute inset-0 opacity-10">
+    <svg width="100%" height="100%">
+      <defs>
+        <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1" fill="#E42869" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#dots)" />
+    </svg>
+  </div>
+
+  <div class="max-w-3xl mx-auto text-center relative z-10">
     <ScrollReveal>
       <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">Ready to Automate?</p>
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Let's talk about what AI can do for your business</h2>
       <p class="text-lg text-gray-300 leading-relaxed mb-10">
         No jargon. No hard sell. Just a practical conversation about your workflows and where intelligent automation fits.
       </p>
-      <a href="/contact" class="inline-flex items-center gap-2 px-10 py-4 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-all duration-200 text-lg">
+      <a href="/contact" class="group inline-flex items-center gap-2 px-10 py-4 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-all duration-200 text-lg">
         Get in Touch
-        <span>→</span>
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
       </a>
     </ScrollReveal>
   </div>

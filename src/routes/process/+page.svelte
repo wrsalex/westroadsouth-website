@@ -34,7 +34,7 @@
 </script>
 
 <svelte:head>
-  <title>Process — West Road South</title>
+  <title>Process — WestRoadSouth</title>
 </svelte:head>
 
 <!-- Hero -->

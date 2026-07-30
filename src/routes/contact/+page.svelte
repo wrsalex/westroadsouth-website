@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>Contact — West Road South</title>
+  <title>Contact — WestRoadSouth</title>
 </svelte:head>
 
 <section class="py-24 md:py-32 px-6 bg-wrs-off-white">

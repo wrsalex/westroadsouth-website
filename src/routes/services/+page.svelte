@@ -96,7 +96,7 @@
 </script>
 
 <svelte:head>
-  <title>Services — West Road South</title>
+  <title>Services — WestRoadSouth</title>
 </svelte:head>
 
 <section class="py-24 md:py-32 px-6 bg-wrs-off-white">

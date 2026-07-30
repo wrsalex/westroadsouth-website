@@ -1,7 +1,7 @@
-# West Road South — AGENTS.md
+# WestRoadSouth — AGENTS.md
 
 ## What This Is
-Company website for West Road South — an AI agent services agency. We build and deploy AI agents that automate workflows, optimize processes, and scale intelligence for businesses.
+Company website for WestRoadSouth — an AI agent services agency. We build and deploy AI agents that automate workflows, optimize processes, and scale intelligence for businesses.
 
 ## Stack
 - **Framework:** SvelteKit 2.x + Svelte 5

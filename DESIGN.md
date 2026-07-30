@@ -1,4 +1,4 @@
-# West Road South — DESIGN.md
+# WestRoadSouth — DESIGN.md
 
 Canonical visual identity for westroadsouth.com. Extracted from existing live site.
 Dark charcoal + pink accent + clean white. Corporate, credible, understated.
