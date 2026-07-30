@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --wrs-navy: #0A1628;
+    --wrs-navy-light: #132240;
+    --wrs-gold: #C9A94E;
+    --wrs-gold-dim: rgba(201, 169, 78, 0.15);
+    --wrs-cream: #F5F0E8;
+    --wrs-cream-muted: rgba(245, 240, 232, 0.65);
+    --wrs-cream-dim: rgba(245, 240, 232, 0.35);
+    --wrs-surface: #0F1D35;
+    --wrs-border: rgba(201, 169, 78, 0.12);
+  }
+}
+
+@theme {
+  --color-wrs-navy: var(--wrs-navy);
+  --color-wrs-navy-light: var(--wrs-navy-light);
+  --color-wrs-gold: var(--wrs-gold);
+  --color-wrs-gold-dim: var(--wrs-gold-dim);
+  --color-wrs-cream: var(--wrs-cream);
+  --color-wrs-cream-muted: var(--wrs-cream-muted);
+  --color-wrs-cream-dim: var(--wrs-cream-dim);
+  --color-wrs-surface: var(--wrs-surface);
+  --color-wrs-border: var(--wrs-border);
+}
+
+body {
+  background: var(--wrs-navy);
+  color: var(--wrs-cream);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
