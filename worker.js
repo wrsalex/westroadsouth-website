@@ -15,7 +15,7 @@ export default {
       return response;
     }
 
-    let spaResponse = await env.ASSETS.fetch(new Request(url.origin + '/404.html', request));
+    let spaResponse = await env.ASSETS.fetch(new Request(url.origin + '/index.html', request));
     return new Response(spaResponse.body, {
       status: 200,
       headers: { 'Content-Type': 'text/html', 'Cache-Control': 'no-store, max-age=0' }
