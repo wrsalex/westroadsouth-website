@@ -1,146 +1,145 @@
 <script>
+  import ScrollReveal from '$lib/components/ScrollReveal.svelte';
+
   let services = [
     {
+      icon: '🤖',
       title: 'AI Agent Development',
-      desc: 'Custom AI agents that automate complex workflows, handle customer interactions, and make decisions in real time. Built on proven agent runtimes, deployed to your infrastructure.',
-      icon: '🤖'
+      desc: 'Custom autonomous agents that handle complex workflows, make real-time decisions, and integrate with your existing systems. Built for reliability, designed for scale.'
     },
     {
+      icon: '⚡',
       title: 'Work Process Optimization',
-      desc: 'We analyze your existing workflows, identify bottlenecks, and deploy AI agents to streamline operations. From document processing to data entry to decision support — automated end to end.',
-      icon: '⚡'
+      desc: 'We analyze your operations end-to-end, identify bottlenecks, and deploy AI agents that eliminate manual overhead. Typical outcomes: 40-60% reduction in processing time.'
     },
     {
+      icon: '💬',
       title: 'Agent-Powered Customer Service',
-      desc: 'Conversational AI agents that handle support tickets, qualify leads, and resolve issues without human escalation. Multilingual, 24/7, integrated with your existing tools.',
-      icon: '💬'
-    },
-    {
-      title: 'AI Integration & Infrastructure',
-      desc: 'End-to-end AI infrastructure — from model selection and fine-tuning to deployment, monitoring, and continuous improvement. Secure, scalable, SOC 2-ready architecture.',
-      icon: '🔧'
-    },
-    {
-      title: 'Data Pipeline Automation',
-      desc: 'Intelligent data pipelines that extract, transform, and route information across your systems. AI agents handle the edge cases that traditional ETL misses.',
-      icon: '📊'
-    },
-    {
-      title: 'AI Strategy & Consulting',
-      desc: 'Not sure where to start? We assess your business, identify high-ROI AI opportunities, and build a phased roadmap. From proof-of-concept to full production deployment.',
-      icon: '🎯'
+      desc: 'Conversational AI that resolves 70%+ of inquiries without human intervention. Multilingual, 24/7, integrated with your CRM, helpdesk, and knowledge base.'
     }
   ];
 
   let stats = [
-    { value: '50+', label: 'AI Agents Deployed' },
-    { value: '12+', label: 'Years in Business' },
-    { value: '200+', label: 'Projects Delivered' },
-    { value: '98%', label: 'Client Retention' }
+    { value: '50+', label: 'AI Agents Deployed', suffix: 'in production across industries' },
+    { value: '12+', label: 'Years in Business', suffix: 'delivering enterprise solutions' },
+    { value: '200+', label: 'Projects Delivered', suffix: 'across APAC and global markets' },
+    { value: '98%', label: 'Client Retention', suffix: 'partnerships, not transactions' }
   ];
+
+  let trustLogos = ['Enterprise', 'SME', 'Startup', 'Gov', 'Finance'];
 </script>
 
 <!-- Hero -->
-<section class="py-28 md:py-36 px-6">
-  <div class="max-w-4xl mx-auto">
-    <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-6">
-      AI Agent Services
-    </p>
-    <h1 class="text-4xl md:text-6xl font-bold text-wrs-ink leading-tight mb-6">
-      Intelligent Automation<br>for Modern Business
-    </h1>
-    <p class="text-lg md:text-xl text-wrs-gray leading-relaxed max-w-2xl mb-10">
-      We build and deploy AI agents that transform how your business operates —
-      automating workflows, optimizing processes, and scaling intelligence across your organization.
-    </p>
-    <div class="flex flex-wrap gap-4">
-      <a href="#contact" class="inline-block px-8 py-3.5 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-colors duration-200">
-        Start Your AI Journey
-      </a>
-      <a href="#services" class="inline-block px-8 py-3.5 border-2 border-wrs-pink text-wrs-pink font-semibold rounded hover:bg-wrs-pink hover:text-white transition-colors duration-200">
-        Our Services
-      </a>
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+    <svg width="100%" height="100%"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1F1F1F" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 py-28 md:py-40 relative">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wrs-pink/20 bg-wrs-pink/5 text-wrs-pink text-xs font-semibold uppercase tracking-widest mb-8">
+        <span class="w-2 h-2 rounded-full bg-wrs-pink animate-pulse"></span>
+        AI Agent Services
+      </div>
+
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-wrs-ink leading-[1.08] mb-6">
+        We build AI agents<br>
+        <span class="text-wrs-pink">that do the work</span>
+      </h1>
+
+      <p class="text-lg md:text-xl text-wrs-gray leading-relaxed max-w-xl mb-10">
+        From automating routine operations to orchestrating complex workflows — we deploy intelligent agents that reduce costs, eliminate errors, and scale your business without scaling headcount.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a href="/contact" class="group inline-flex items-center gap-2 px-8 py-4 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-all duration-200">
+          Start Your AI Journey
+          <span class="group-hover:translate-x-1 transition-transform duration-200">→</span>
+        </a>
+        <a href="/services" class="inline-flex items-center gap-2 px-8 py-4 border-2 border-wrs-pink text-wrs-pink font-semibold rounded hover:bg-wrs-pink hover:text-white transition-all duration-200">
+          Explore Services
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Stats Bar -->
-<section class="py-14 bg-wrs-off-white">
-  <div class="max-w-5xl mx-auto px-6">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      {#each stats as stat}
-        <div>
-          <div class="text-3xl md:text-4xl font-bold text-wrs-ink mb-1">{stat.value}</div>
-          <div class="text-sm text-wrs-gray uppercase tracking-wider">{stat.label}</div>
-        </div>
+<!-- Trust bar -->
+<section class="border-y border-wrs-border bg-wrs-off-white">
+  <div class="max-w-6xl mx-auto px-6 py-8 flex flex-wrap items-center justify-center md:justify-between gap-6">
+    <span class="text-xs text-wrs-gray-light uppercase tracking-widest font-semibold">Trusted by organizations across</span>
+    <div class="flex flex-wrap gap-6">
+      {#each trustLogos as name}
+        <span class="text-sm text-wrs-ink-dim font-semibold">{name}</span>
       {/each}
     </div>
   </div>
 </section>
 
-<!-- Services -->
-<section id="services" class="py-24 md:py-28 px-6">
-  <div class="max-w-5xl mx-auto">
-    <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">What We Do</p>
-    <h2 class="text-3xl md:text-4xl font-bold text-wrs-ink mb-16">AI Agent Services</h2>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {#each services as svc}
-        <div class="group p-8 rounded-lg border border-wrs-border bg-white hover:border-wrs-pink transition-colors duration-200">
-          <div class="text-3xl mb-5">{svc.icon}</div>
-          <h3 class="text-lg font-semibold text-wrs-ink mb-3">{svc.title}</h3>
-          <p class="text-sm text-wrs-gray leading-relaxed">{svc.desc}</p>
-        </div>
+<!-- Stats -->
+<section class="py-20 md:py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {#each stats as stat, i}
+        <ScrollReveal delay={i * 100}>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-wrs-ink mb-2">{stat.value}</div>
+            <div class="text-sm font-semibold text-wrs-ink mb-1">{stat.label}</div>
+            <div class="text-xs text-wrs-gray-light">{stat.suffix}</div>
+          </div>
+        </ScrollReveal>
       {/each}
     </div>
   </div>
 </section>
 
-<!-- Process -->
+<!-- Services Preview -->
 <section class="py-24 md:py-28 px-6 bg-wrs-off-white">
-  <div class="max-w-5xl mx-auto">
-    <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">How We Work</p>
-    <h2 class="text-3xl md:text-4xl font-bold text-wrs-ink mb-16">From Assessment to Autonomous Operation</h2>
+  <div class="max-w-6xl mx-auto">
+    <ScrollReveal>
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">What We Do</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-wrs-ink mb-4">AI-native services for the modern enterprise</h2>
+      <p class="text-wrs-gray max-w-2xl mb-14">Every engagement starts with understanding your business. We don't sell AI — we solve problems.</p>
+    </ScrollReveal>
 
-    <div class="grid md:grid-cols-4 gap-6">
-      {#each [
-        { step: '01', title: 'Discover', desc: 'We audit your workflows, identify automation opportunities, and quantify the ROI of each.' },
-        { step: '02', title: 'Design', desc: 'We architect the agent pipeline — models, tools, integrations, and human-in-the-loop fallbacks.' },
-        { step: '03', title: 'Deploy', desc: 'Agents go live in your environment with monitoring, logging, and gradual roll-out controls.' },
-        { step: '04', title: 'Optimize', desc: 'Continuous feedback loops improve agent performance. Monthly review of KPIs and cost efficiency.' }
-      ] as phase}
-        <div class="text-center md:text-left">
-          <div class="text-wrs-pink text-3xl font-bold mb-3">{phase.step}</div>
-          <h3 class="text-lg font-semibold text-wrs-ink mb-2">{phase.title}</h3>
-          <p class="text-sm text-wrs-gray leading-relaxed">{phase.desc}</p>
-        </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      {#each services as svc, i}
+        <ScrollReveal delay={i * 150}>
+          <a href="/services" class="group block p-8 rounded-lg border border-wrs-border bg-white hover:border-wrs-pink hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <div class="text-3xl mb-5">{svc.icon}</div>
+            <h3 class="text-lg font-semibold text-wrs-ink mb-3 group-hover:text-wrs-pink transition-colors">{svc.title}</h3>
+            <p class="text-sm text-wrs-gray leading-relaxed mb-4">{svc.desc}</p>
+            <span class="text-sm font-semibold text-wrs-pink group-hover:gap-2 flex items-center gap-1 transition-all">
+              Learn more <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </a>
+        </ScrollReveal>
       {/each}
     </div>
+
+    <ScrollReveal delay={300}>
+      <div class="text-center mt-12">
+        <a href="/services" class="inline-flex items-center gap-2 text-wrs-pink font-semibold hover:underline">
+          View all services <span>→</span>
+        </a>
+      </div>
+    </ScrollReveal>
   </div>
 </section>
 
 <!-- CTA -->
-<section id="contact" class="py-24 md:py-32 px-6 bg-wrs-ink">
+<section class="py-24 md:py-32 px-6 bg-wrs-ink">
   <div class="max-w-3xl mx-auto text-center">
-    <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">Let's Talk</p>
-    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Automate?</h2>
-    <p class="text-lg text-gray-300 leading-relaxed mb-10 max-w-xl mx-auto">
-      Tell us about your business and we'll show you what AI agents can do. No jargon, no hard sell — just a practical conversation about automation.
-    </p>
-    <a href="mailto:alex@westroadsouth.com" class="inline-block px-10 py-4 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-colors duration-200 text-lg">
-      Get in Touch
-    </a>
+    <ScrollReveal>
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">Ready to Automate?</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Let's talk about what AI can do for your business</h2>
+      <p class="text-lg text-gray-300 leading-relaxed mb-10">
+        No jargon. No hard sell. Just a practical conversation about your workflows and where intelligent automation fits.
+      </p>
+      <a href="/contact" class="inline-flex items-center gap-2 px-10 py-4 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-all duration-200 text-lg">
+        Get in Touch
+        <span>→</span>
+      </a>
+    </ScrollReveal>
   </div>
 </section>
-
-<!-- Footer -->
-<footer class="py-10 px-6 bg-wrs-ink border-t border-gray-800">
-  <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-    <p class="text-sm text-gray-400">&copy; {new Date().getFullYear()} West Road South. All rights reserved.</p>
-    <div class="flex gap-6 text-sm text-gray-400">
-      <a href="mailto:alex@westroadsouth.com" class="hover:text-wrs-pink transition-colors">Contact</a>
-      <button class="hover:text-wrs-pink transition-colors">Privacy</button>
-      <button class="hover:text-wrs-pink transition-colors">Terms</button>
-    </div>
-  </div>
-</footer>
