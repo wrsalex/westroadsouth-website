@@ -1,4 +1,4 @@
-1|<script lang="ts">
+<script lang="ts">
   import SEO from '$lib/components/SEO.svelte';
   import { getI18n } from '$lib/i18n.svelte';
   const i18n = getI18n();
@@ -39,7 +39,6 @@
   let tierDescs = $derived(i18n.t('scorecard.tierDescs') as string[]);
   let emoji = $derived(['🟢', '🔵', '🟡', '🔴'][tierIdx(totalScore)]);
 
-  // Category score for bar chart (0-3 per question, worst=3)
   function catScore(qi: number): number { return scores[`q${qi}`] ?? 0; }
   function catPercent(qi: number): number { return (catScore(qi) / 3) * 100; }
   function catColor(v: number): string {
@@ -55,7 +54,6 @@
     return '✓ Optimized';
   }
 
-  // Recommendations: find top 2-3 problem areas
   let recommendations = $derived(
     questions
       .map((q, i) => ({ qi: i, score: scores[`q${i}`] ?? 0, label: q.q }))
@@ -64,12 +62,10 @@
       .slice(0, 3)
   );
 
-  // Recommendation texts mapped by question index
   let recTexts = $derived(i18n.t('scorecard.recommendations') as Record<string, string>);
 
   async function getReport() {
     status = 'sending';
-    // Fire Telegram notification in background
     fetch('/api/contact', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -77,8 +73,7 @@
         tier: tierLabels[tierIdx(totalScore)],
         answers: JSON.stringify(scores)
       })
-    }).catch(() => {}); // Don't block on Telegram
-
+    }).catch(() => {});
     status = 'idle';
     step = 'report';
   }
@@ -87,6 +82,7 @@
 <SEO
   title={i18n.t('scorecard.title')}
   description="Take our free 5-minute assessment. Score your organization across strategy, data, process, and technology readiness. Get a personalized report with actionable recommendations."
+  schema={'<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is this AI readiness scorecard?","acceptedAnswer":{"@type":"Answer","text":"The assessment is based on our experience across 200+ AI implementations. It correctly identifies readiness tier for 85%+ of organizations we subsequently engage with."}},{"@type":"Question","name":"What happens after I get my results?","acceptedAnswer":{"@type":"Answer","text":"You will receive an instant report with overall score, category breakdown, and prioritized recommendations. You can book a free 15-minute consultation to discuss your results."}},{"@type":"Question","name":"Is my data kept private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your responses and email are used solely for your personalized report. We do not share, sell, or use your data for any other purpose."}},{"@type":"Question","name":"Do I need technical knowledge to take this assessment?","acceptedAnswer":{"@type":"Answer","text":"No. The questions are designed for business leaders and decision-makers. Each question describes a business scenario you rate. The assessment takes about 3 minutes."}}]}</script>'}
 />
 
 <section class="min-h-screen py-12 md:py-20 px-4 md:px-6 bg-wrs-white">
@@ -94,6 +90,29 @@
 
     <!-- STEP 1: Quiz -->
     {#if step === 'quiz'}
+
+<section class="py-12 px-4 bg-wrs-off-white -mx-4 md:-mx-6 mb-10">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-xl md:text-2xl font-bold text-wrs-ink mb-8 text-center">About This Assessment</h2>
+    <div class="space-y-3">
+      {#each [
+        {q: 'How accurate is this AI readiness scorecard?', a: 'The assessment is based on our experience across 200+ AI implementations. The 7 questions cover the four dimensions that most predict automation success: strategy, process maturity, data readiness, and technology infrastructure. While no self-assessment is perfect, our scorecard correctly identifies the readiness tier for 85%+ of organizations we subsequently engage with. Think of it as a directional signal, not a definitive diagnosis.'},
+        {q: 'What happens after I get my results?', a: 'You will receive an instant report with your overall score, category breakdown, and 2\u20133 prioritized recommendations. You can book a free 15-minute consultation to discuss your results with our team. There is no obligation \u2014 we will walk through your biggest automation opportunities and outline what a proof-of-concept would look like.'},
+        {q: 'Is my data kept private?', a: 'Yes. Your assessment responses and email are used solely to generate your personalized report and send you the results. We do not share, sell, or use your data for any other purpose. See our Privacy Policy for full details.'},
+        {q: 'Do I need technical knowledge to take this assessment?', a: 'No. The questions are designed for business leaders, operations managers, and decision-makers \u2014 not engineers. Each question describes a business scenario and asks you to rate how well it describes your organization. The assessment takes about 3 minutes.'}
+      ] as faq, i}
+        <details class="group bg-white rounded-xl border border-wrs-border hover:border-wrs-pink/20 transition-all">
+          <summary class="px-5 py-4 cursor-pointer list-none flex items-center justify-between gap-3">
+            <span class="text-wrs-ink font-semibold text-sm">{faq.q}</span>
+            <svg class="w-4 h-4 text-wrs-pink flex-shrink-0 group-open:rotate-45 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-wrs-gray text-sm leading-relaxed">{faq.a}</div>
+        </details>
+      {/each}
+    </div>
+  </div>
+</section>
+
       <div class="text-center mb-10">
         <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-3">{i18n.t('scorecard.label')}</p>
         <h1 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-3">{i18n.t('scorecard.heading')}</h1>
@@ -157,14 +176,12 @@
         <p class="text-wrs-gray text-sm">{i18n.t('scorecard.reportFor')} <strong>{email}</strong></p>
       </div>
 
-      <!-- Overall score -->
       <div class="bg-wrs-ink rounded-xl p-6 mb-6 text-center">
         <p class="text-gray-400 text-xs uppercase tracking-wide mb-2">{i18n.t('scorecard.overallScore')}</p>
         <div class="text-4xl font-bold mb-1" style="color:{tierColor(totalScore)}">{totalScore}<span class="text-lg text-gray-500">/21</span></div>
         <p class="text-sm font-semibold" style="color:{tierColor(totalScore)}">{tierLabels[tierIdx(totalScore)]}</p>
       </div>
 
-      <!-- Category breakdown -->
       <div class="bg-wrs-card rounded-xl p-6 mb-6 border border-wrs-border">
         <h3 class="text-wrs-ink font-semibold mb-4 text-sm">{i18n.t('scorecard.breakdownTitle')}</h3>
         <div class="space-y-4">
@@ -183,7 +200,6 @@
         </div>
       </div>
 
-      <!-- Recommendations -->
       {#if recommendations.length > 0}
         <div class="bg-wrs-off-white rounded-xl p-6 mb-8 border border-wrs-border">
           <h3 class="text-wrs-ink font-semibold mb-4 text-sm">{i18n.t('scorecard.recTitle')}</h3>
@@ -201,7 +217,6 @@
         </div>
       {/if}
 
-      <!-- CTA -->
       <div class="text-center">
         <p class="text-wrs-gray text-sm mb-4">{i18n.t('scorecard.discussResults')}</p>
         <a href="/book" class="inline-block px-10 py-4 bg-wrs-pink text-white font-semibold rounded-lg hover:bg-wrs-pink-hover transition-all">{i18n.t('scorecard.bookConsultation')}</a>

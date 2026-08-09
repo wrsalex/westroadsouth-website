@@ -8,6 +8,7 @@
 <SEO
   title={i18n.t('processPage.hero.badge')}
   description="How we build AI agents: discovery audit → architecture design → iterative development → deployment → continuous optimization. A proven 5-phase methodology refined over 200+ projects."
+  schema={'<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How long does a typical AI agent project take?","acceptedAnswer":{"@type":"Answer","text":"Most projects follow our 5-phase methodology and complete within 4-12 weeks, depending on complexity."}},{"@type":"Question","name":"What makes your process different from hiring an in-house AI team?","acceptedAnswer":{"@type":"Answer","text":"Speed and risk reduction. We bring a battle-tested methodology refined over 200+ projects, plus pre-built infrastructure that would take 12-18 months to build internally."}},{"@type":"Question","name":"Do I need to replace my existing software and tools?","acceptedAnswer":{"@type":"Answer","text":"No. Our agents integrate with your existing stack through APIs, webhooks, and database connections."}},{"@type":"Question","name":"What happens after the agent is deployed?","acceptedAnswer":{"@type":"Answer","text":"Phase 5 is Continuous Optimization. We monitor your agent, track KPIs, and refine behavior based on real-world usage."}},{"@type":"Question","name":"What industries do you have experience in?","acceptedAnswer":{"@type":"Answer","text":"Logistics and supply chain, financial services, e-commerce and retail, customer service, real estate, legal document processing."}}]}</script>'}
 />
 
 <section class="py-16 md:py-32 px-4 md:px-6 bg-wrs-white">
@@ -48,6 +49,34 @@
               <div class="hidden md:block {i % 2 === 1 ? 'md:order-1' : ''}"></div>
             </div>
           </div>
+        </ScrollReveal>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<section class="py-16 md:py-24 px-4 md:px-6 bg-wrs-white">
+  <div class="max-w-3xl mx-auto">
+    <ScrollReveal>
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-3 text-center">FAQ</p>
+      <h2 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-10 text-center">Common Questions About Our Process</h2>
+    </ScrollReveal>
+    <div class="space-y-4">
+      {#each [
+        {q: 'How long does a typical AI agent project take?', a: 'Most projects follow our 5-phase methodology and complete within 4\u201312 weeks, depending on complexity. A proof-of-concept sprint takes 2\u20133 weeks. Enterprise-scale deployments with multiple integrations may extend to 12\u201316 weeks. We set clear milestones at every phase so you always know where things stand.'},
+        {q: 'What makes your process different from hiring an in-house AI team?', a: 'Speed and risk reduction. Hiring an in-house AI team takes 3\u20136 months just to recruit. We bring a battle-tested methodology refined over 200+ projects, plus pre-built infrastructure (ACRN engine, Ascend memory) that would take an internal team 12\u201318 months to build from scratch. You get production results in weeks, not years.'},
+        {q: 'Do I need to replace my existing software and tools?', a: 'No. Our agents integrate with your existing stack through APIs, webhooks, and database connections. We design around what you already use. Phase 2 (Architecture Design) maps exactly how the agent connects to your systems \u2014 no rip-and-replace required.'},
+        {q: 'What happens after the agent is deployed?', a: 'Phase 5 is Continuous Optimization. We monitor your agent in production, track KPIs, and refine its behavior based on real-world usage. Most clients start with weekly check-ins that gradually reduce to monthly. We also train your team to manage and extend the agent independently if you prefer.'},
+        {q: 'What industries do you have experience in?', a: 'Logistics and supply chain, financial services and compliance, e-commerce and retail, customer service operations, real estate and property management, legal document processing. Our case studies page has detailed examples with metrics.'}
+      ] as faq, i}
+        <ScrollReveal delay={i * 80}>
+          <details class="group bg-wrs-off-white rounded-xl border border-wrs-border hover:border-wrs-pink/20 transition-all">
+            <summary class="px-6 py-5 cursor-pointer list-none flex items-center justify-between gap-4">
+              <span class="text-wrs-ink font-semibold text-sm md:text-base">{faq.q}</span>
+              <svg class="w-5 h-5 text-wrs-pink flex-shrink-0 group-open:rotate-45 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </summary>
+            <div class="px-6 pb-5 text-wrs-gray text-sm leading-relaxed">{faq.a}</div>
+          </details>
         </ScrollReveal>
       {/each}
     </div>
