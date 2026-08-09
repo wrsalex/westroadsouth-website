@@ -1,6 +1,11 @@
-<svelte:head>
-  <title>Terms of Service — WestRoadSouth</title>
-</svelte:head>
+<script lang="ts">
+  import SEO from '$lib/components/SEO.svelte';
+</script>
+
+<SEO
+  title="Terms of Service — WestRoadSouth AI Agent Services"
+  description="Terms and conditions governing the use of WestRoadSouth AI agent services, software platforms, and consulting engagements. Effective November 2015."
+/>
 
 <section class="py-24 md:py-28 px-6">
   <div class="max-w-3xl mx-auto prose prose-gray max-w-none">

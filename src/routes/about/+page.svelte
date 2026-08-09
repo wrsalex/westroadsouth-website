@@ -1,52 +1,63 @@
-<script>
+<script lang="ts">
   import ScrollReveal from '$lib/components/ScrollReveal.svelte';
+  import SEO from '$lib/components/SEO.svelte';
+  import { getI18n } from '$lib/i18n.svelte';
+  const i18n = getI18n();
+
+  let stats = [
+    { value: 50, suffix: '+', label: 'AI Agents Deployed', sub: 'In production across APAC' },
+    { value: 12, suffix: '+', label: 'Years Building AI', sub: 'Since before the hype' },
+    { value: 200, suffix: '+', label: 'Projects Delivered', sub: 'Enterprise to startup' },
+    { value: 98, suffix: '%', label: 'Client Retention', sub: 'Partnerships, not transactions' }
+  ];
+
+  let values = [
+    { title: 'Ship Working Software', desc: `Demos don't count. We deploy to production, measure real outcomes, and iterate based on data — not opinions.` },
+    { title: 'Open Source by Default', desc: 'Our core stack is open source. Clients own their agents. No vendor lock-in, no black boxes, no surprises.' },
+    { title: 'Solve Real Problems', desc: `We don't build AI for AI's sake. Every engagement starts with understanding the business outcome you need.` },
+    { title: 'Build for Scale', desc: 'From day one, our agents are designed for production: monitoring, failover, audit trails, and graceful degradation.' }
+  ];
 </script>
 
-<svelte:head>
-  <title>About — WestRoadSouth</title>
-</svelte:head>
+<SEO
+  title="About WestRoadSouth — AI Agent Company Based in Hong Kong"
+  description="Born in Hong Kong, built for the world. 12 years delivering AI solutions, 50+ agents deployed, 200+ projects, 98% client retention. We ship working software."
+/>
 
-<section class="py-24 md:py-32 px-6 bg-wrs-off-white">
-  <div class="max-w-4xl mx-auto">
+<section class="py-16 md:py-32 px-4 md:px-6 bg-wrs-white">
+  <div class="max-w-4xl mx-auto text-center">
     <ScrollReveal>
-      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">About Us</p>
-      <h1 class="text-4xl md:text-5xl font-bold text-wrs-ink mb-6">We've been building AI before it was called AI</h1>
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">{i18n.t('aboutPage.title')}</p>
+      <h1 class="text-3xl md:text-5xl font-bold text-wrs-ink mb-6">{i18n.t('aboutPage.subtitle')}</h1>
     </ScrollReveal>
+  </div>
+</section>
 
-    <ScrollReveal delay={150}>
-      <div class="prose prose-lg max-w-none text-wrs-gray leading-relaxed space-y-6">
-        <p>
-          WestRoadSouth was founded in 2014 as a technology consultancy. Over the past decade, we've delivered over 200 projects — from eCommerce platforms processing millions in transactions to enterprise data pipelines handling billions of records.
-        </p>
-        <p>
-          When large language models emerged, we didn't chase the hype. We methodically integrated AI into the workflows we already understood — automating the tedious, augmenting the complex, and measuring everything against real business metrics.
-        </p>
-        <p>
-          Today, we're an AI agent services agency. We build autonomous agents that handle multi-step business processes, integrate with existing systems, and deliver measurable ROI — typically within 3-6 months.
-        </p>
+<section class="py-14 md:py-28 px-4 md:px-6 bg-wrs-off-white">
+  <div class="max-w-3xl mx-auto">
+    <img src="/images/about-hk-visual.png" alt="Hong Kong meets AI" class="w-full rounded-2xl mb-12 shadow-lg" />
+    <ScrollReveal>
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">{i18n.t('aboutPage.story.label')}</p>
+      <h2 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-8">{i18n.t('aboutPage.story.heading')}</h2>
+      <div class="space-y-6 text-wrs-gray leading-relaxed text-lg">
+        <p>{i18n.t('aboutPage.story.p1')}</p>
+        <p>{i18n.t('aboutPage.story.p2')}</p>
+        <p>{i18n.t('aboutPage.story.p3')}</p>
       </div>
     </ScrollReveal>
   </div>
 </section>
 
-<!-- Values -->
-<section class="py-20 px-6">
+<section class="py-14 md:py-24 px-4 md:px-6">
   <div class="max-w-4xl mx-auto">
-    <ScrollReveal>
-      <h2 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-12 text-center">What we believe</h2>
-    </ScrollReveal>
-
-    <div class="grid md:grid-cols-2 gap-8">
-      {#each [
-        { title: 'Outcomes over hype', desc: 'We don\'t sell AI — we solve problems. If a spreadsheet is the right tool, we\'ll tell you. If an agent will save you 200 hours a month, we\'ll build it.' },
-        { title: 'Transparency by default', desc: 'No black boxes. Every agent we deploy is documented, auditable, and explainable. You own the IP, the data, and the models.' },
-        { title: 'Humans in the loop', desc: 'AI augments humans, not replaces them. Our agents handle the routine; your team handles the exceptions — with full visibility into both.' },
-        { title: 'Measured, not assumed', desc: 'Every engagement starts with baseline metrics and ends with an ROI calculation. If we can\'t measure it, we don\'t claim it.' }
-      ] as value}
-        <ScrollReveal delay={100}>
-          <div class="p-6 rounded-lg border border-wrs-border hover:border-wrs-pink transition-colors duration-200">
-            <h3 class="font-semibold text-wrs-ink mb-2">{value.title}</h3>
-            <p class="text-sm text-wrs-gray leading-relaxed">{value.desc}</p>
+    <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4 text-center">{i18n.t('aboutPage.stats.label')}</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-8">
+      {#each stats as stat, i}
+        <ScrollReveal delay={i * 100}>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-wrs-ink mb-2">{stat.value}{stat.suffix}</div>
+            <div class="text-sm font-semibold text-wrs-ink mb-1">{stat.label}</div>
+            <div class="text-xs text-wrs-gray-light">{stat.sub}</div>
           </div>
         </ScrollReveal>
       {/each}
@@ -54,14 +65,55 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="py-20 px-6 bg-wrs-ink text-center">
-  <div class="max-w-2xl mx-auto">
+<section class="py-14 md:py-28 px-4 md:px-6 bg-wrs-off-white">
+  <div class="max-w-4xl mx-auto">
     <ScrollReveal>
-      <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Let's build something together</h2>
-      <p class="text-gray-300 mb-8">Whether you're exploring what AI can do or ready to deploy — we're here to help.</p>
-      <a href="/contact" class="inline-flex items-center gap-2 px-8 py-3.5 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-colors">
-        Get in Touch <span>→</span>
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4 text-center">{i18n.t('aboutPage.values.label')}</p>
+      <h2 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-12 text-center">{i18n.t('aboutPage.values.heading')}</h2>
+    </ScrollReveal>
+    <div class="grid sm:grid-cols-2 gap-8">
+      {#each values as v, i}
+        <ScrollReveal delay={i * 150}>
+          <div class="p-8 rounded-xl border border-wrs-border bg-white hover:border-wrs-pink hover:-translate-y-1 transition-all duration-300">
+            <div class="w-8 h-8 rounded-lg bg-wrs-pink/10 flex items-center justify-center text-wrs-pink font-bold text-sm mb-4">{i + 1}</div>
+            <h3 class="text-lg font-bold text-wrs-ink mb-3">{v.title}</h3>
+            <p class="text-wrs-gray text-sm leading-relaxed">{v.desc}</p>
+          </div>
+        </ScrollReveal>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<section class="py-16 px-6 bg-wrs-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-xl md:text-2xl font-bold text-wrs-ink mb-2 text-center">{i18n.t('exploreMore.title')}</h2>
+    <p class="text-wrs-gray text-sm text-center mb-10">{i18n.t('exploreMore.sub')}</p>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <a href="/services" class="group p-5 rounded-xl border border-wrs-border hover:border-wrs-pink/30 hover:-translate-y-1 transition-all duration-300 text-center">
+        <h3 class="font-semibold text-wrs-ink mb-1 group-hover:text-wrs-pink transition-colors">{i18n.t('exploreMore.services')}</h3>
+        <p class="text-xs text-wrs-gray">{i18n.t('exploreMore.servicesDesc')}</p>
+      </a>
+      <a href="/process" class="group p-5 rounded-xl border border-wrs-border hover:border-wrs-pink/30 hover:-translate-y-1 transition-all duration-300 text-center">
+        <h3 class="font-semibold text-wrs-ink mb-1 group-hover:text-wrs-pink transition-colors">{i18n.t('exploreMore.howWeWork')}</h3>
+        <p class="text-xs text-wrs-gray">{i18n.t('exploreMore.sub')}</p>
+      </a>
+      <a href="/case-studies" class="group p-5 rounded-xl border border-wrs-border hover:border-wrs-pink/30 hover:-translate-y-1 transition-all duration-300 text-center">
+        <h3 class="font-semibold text-wrs-ink mb-1 group-hover:text-wrs-pink transition-colors">{i18n.t('exploreMore.caseStudies')}</h3>
+        <p class="text-xs text-wrs-gray">{i18n.t('exploreMore.caseDesc2')}</p>
+      </a>
+    </div>
+  </div>
+</section>
+<section class="py-16 md:py-32 px-4 md:px-6 bg-wrs-ink relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10"><svg width="100%" height="100%"><defs><pattern id="da" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#E42869"/></pattern></defs><rect width="100%" height="100%" fill="url(#da)"/></svg></div>
+  <div class="max-w-2xl mx-auto text-center relative z-10">
+    <ScrollReveal>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">{i18n.t('aboutPage.cta')}</h2>
+      <p class="text-lg text-gray-300 mb-10">{i18n.t('aboutPage.ctaDesc')}</p>
+      <a href="/book" class="group inline-flex items-center gap-2 px-10 py-4 bg-wrs-pink text-white font-semibold rounded hover:bg-wrs-pink-hover transition-all text-lg">
+        {i18n.t('aboutPage.ctaButton')}
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
       </a>
     </ScrollReveal>
   </div>

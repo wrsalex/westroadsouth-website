@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="%sveltekit.assets%/favicon.png" />
     <title>WestRoadSouth</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://westroadsouth.com/#org",
+      "name": "WestRoadSouth",
+      "url": "https://westroadsouth.com",
+      "logo": "https://westroadsouth.com/favicon.png",
+      "description": "WestRoadSouth builds custom AI agents for complex workflows, process optimization, and enterprise automation.",
+      "foundingDate": "2014",
+      "founder": { "@type": "Person", "name": "Alex Chui" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Hong Kong", "addressCountry": "HK" },
+      "areaServed": { "@type": "Place", "name": "Worldwide" },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+852-7074-0202",
+        "email": "hello@westroadsouth.com",
+        "availableLanguage": ["English", "Chinese"]
+      },
+      "sameAs": [
+        "https://github.com/wrsalex",
+        "https://www.linkedin.com/company/westroadsouth"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://westroadsouth.com/#website",
+      "url": "https://westroadsouth.com",
+      "name": "WestRoadSouth",
+      "description": "AI agent development — custom autonomous agents for complex workflows and enterprise automation.",
+      "publisher": { "@id": "https://westroadsouth.com/#org" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://westroadsouth.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": ["en", "zh-Hant-HK", "zh-Hans"]
+    }
+    </script>
     %sveltekit.head%
   </head>
   <body>

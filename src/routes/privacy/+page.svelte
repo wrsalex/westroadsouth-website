@@ -1,6 +1,11 @@
-<svelte:head>
-  <title>Privacy Policy — WestRoadSouth</title>
-</svelte:head>
+<script lang="ts">
+  import SEO from '$lib/components/SEO.svelte';
+</script>
+
+<SEO
+  title="Privacy Policy — How WestRoadSouth Handles Your Data"
+  description="Our commitment to data privacy: what we collect, how we use it, and your rights. GDPR-compliant. Serving clients globally from Hong Kong since 2014."
+/>
 
 <section class="py-24 md:py-28 px-6">
   <div class="max-w-3xl mx-auto prose prose-gray max-w-none">
