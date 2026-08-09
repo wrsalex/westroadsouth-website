@@ -1,60 +1,22 @@
-1|<script lang="ts">
+<script lang="ts">
   import SEO from '$lib/components/SEO.svelte';
   import { onMount } from 'svelte';
   import { getI18n } from '$lib/i18n.svelte';
 
   const i18n = getI18n();
   const SITE_KEY = '6Lc7qWwtAAAAAIUUAzm4c7nYw3NpZ3ssic_AZYmy';
+  const CAL_URL = 'https://cal.com/westroadsouth/30min';
 
-  // Time slots for next 5 business days (HK time)
-  function generateTimeSlots(): { date: string; label: string; slots: { time: string; label: string }[] }[] {
-    const days: { date: string; label: string; slots: { time: string; label: string }[] }[] = [];
-    const now = new Date();
-    const hkOffset = 8 * 60; // HKT = UTC+8
-    const nowHk = new Date(now.getTime() + (now.getTimezoneOffset() + hkOffset) * 60000);
-
-    let d = new Date(nowHk);
-    d.setHours(0, 0, 0, 0);
-    if (nowHk.getHours() >= 17) d.setDate(d.getDate() + 1); // If after 5pm, start from tomorrow
-
-    for (let i = 0; i < 5; i++) {
-      d.setDate(d.getDate() + 1);
-      if (d.getDay() === 0) { d.setDate(d.getDate() + 1); continue; } // Skip Sunday
-      if (d.getDay() === 6) { d.setDate(d.getDate() + 1); continue; } // Skip Saturday
-
-      const dateStr = d.toISOString().split('T')[0];
-      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const label = `${dayNames[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
-
-      days.push({
-        date: dateStr,
-        label,
-        slots: [
-          { time: '09:30', label: '9:30 AM HKT' },
-          { time: '11:00', label: '11:00 AM HKT' },
-          { time: '14:30', label: '2:30 PM HKT' },
-          { time: '16:00', label: '4:00 PM HKT' },
-        ]
-      });
-    }
-    return days;
-  }
-
-  let timeSlots = generateTimeSlots();
-
-  // Step: 1=service, 2=needs, 3=time, 4=details, 5=confirm
+  // Step: 1=service, 2=needs, 3=details
   let step = $state(1);
   let service = $state('');
   let needs = $state('');
-  let selectedDate = $state('');
-  let selectedTime = $state('');
   let name = $state('');
   let email = $state('');
   let company = $state('');
   let countryCode = $state('+852');
   let phone = $state('');
-  let status = $state<'idle' | 'sending' | 'success' | 'error'>('idle');
+  let status = $state<'idle' | 'sending' | 'error'>('idle');
   let errorMsg = $state('');
 
   let services = $derived([
@@ -83,13 +45,12 @@
   function canProceed(s: number): boolean {
     if (s === 1) return !!service;
     if (s === 2) return !!needs && needs.length >= 10;
-    if (s === 3) return !!selectedDate && !!selectedTime;
-    if (s === 4) return !!name && !!email;
+    if (s === 3) return !!name && !!email;
     return false;
   }
 
   function nextStep() {
-    if (step < 5 && canProceed(step)) step++;
+    if (step < 3 && canProceed(step)) step++;
   }
 
   function prevStep() {
@@ -122,203 +83,143 @@
 
         if (!verifyData.success) { status = 'error'; errorMsg = i18n.t('book.error'); return; }
 
-        const bookingData = {
-          type: 'booking',
-          service, needs, date: selectedDate, time: selectedTime,
-          name, email, company,
-          countryCode, phone
-        };
-
-        const res = await fetch('/api/contact', {
+        // Fire-and-forget the Telegram notification, then redirect
+        fetch('/api/contact', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(bookingData)
+          body: JSON.stringify({
+            type: 'booking',
+            service, needs,
+            name, email, company,
+            countryCode, phone,
+            calRedirect: true
+          })
         });
 
-        if (res.ok) {
-          status = 'success';
-          step = 5;
-        } else { throw new Error('Submission failed'); }
+        window.location.href = CAL_URL;
       });
     } catch (e) {
       status = 'error';
       errorMsg = i18n.t('book.error');
     }
   }
-
-  let selectedSlot = $derived(
-    timeSlots.find(d => d.date === selectedDate)?.slots.find(s => s.time === selectedTime)
-  );
 </script>
 
 <SEO
   title={i18n.t('book.title')}
-  description="Schedule a free 15-minute call with our AI team. We'll discuss your workflows, identify automation opportunities, and outline a practical path forward."
+  description={i18n.t('book.metaDesc')}
 />
 
 <section class="min-h-screen py-12 md:py-20 px-4 md:px-6 bg-wrs-white">
   <div class="max-w-xl mx-auto">
 
     <!-- Progress bar -->
-    {#if step < 5}
-      <div class="mb-10">
-        <div class="flex justify-between mb-3">
-          {#each [1, 2, 3, 4] as s}
-            <span class="text-xs font-semibold transition-colors" class:text-wrs-pink={step >= s} class:text-wrs-gray-light={step < s}>
-              {s === 1 ? i18n.t('book.stepService') : s === 2 ? i18n.t('book.stepNeeds') : s === 3 ? i18n.t('book.stepTime') : i18n.t('book.stepDetails')}
-            </span>
-          {/each}
-        </div>
-        <div class="h-1.5 bg-wrs-off-white rounded-full overflow-hidden">
-          <div class="h-full bg-wrs-pink rounded-full transition-all duration-400" style="width:{(step - 1) / 3 * 100}%"></div>
+    <div class="mb-10">
+      <div class="flex justify-between mb-3">
+        {#each [1, 2, 3] as s}
+          <span class="text-xs font-semibold transition-colors" class:text-wrs-pink={step >= s} class:text-wrs-gray-light={step < s}>
+            {s === 1 ? i18n.t('book.stepService') : s === 2 ? i18n.t('book.stepNeeds') : i18n.t('book.stepDetails')}
+          </span>
+        {/each}
+      </div>
+      <div class="h-1.5 bg-wrs-off-white rounded-full overflow-hidden">
+        <div class="h-full bg-wrs-pink rounded-full transition-all duration-400" style="width:{(step - 1) / 2 * 100}%"></div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-3">{i18n.t('book.label')}</p>
+      <h1 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-3">{i18n.t('book.heading')}</h1>
+      <p class="text-wrs-gray">{i18n.t('book.subheading')}</p>
+    </div>
+
+    <!-- Step 1: Service selection -->
+    {#if step === 1}
+      <div class="space-y-3">
+        {#each services as svc}
+          <button onclick={() => { service = svc.value; nextStep(); }}
+            class="w-full text-left p-5 rounded-lg border-2 transition-all duration-200 hover:border-wrs-pink hover:bg-pink-50 cursor-pointer {service === svc.value ? 'border-wrs-pink bg-pink-50' : 'border-wrs-border'}">
+            <span class="text-wrs-ink font-semibold">{svc.label}</span>
+          </button>
+        {/each}
+      </div>
+    {/if}
+
+    <!-- Step 2: Needs -->
+    {#if step === 2}
+      <div>
+        <p class="text-sm text-wrs-gray mb-4">{i18n.t('book.needsLabel')}</p>
+        <textarea bind:value={needs} rows="4"
+          class="w-full px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all resize-y"
+          placeholder={i18n.t('book.needsPlaceholder')}></textarea>
+        <p class="text-xs text-wrs-gray-light mt-2" class:text-wrs-pink={needs.length >= 10}>{i18n.t('book.needsHint')} ({needs.length}/10)</p>
+        <div class="flex gap-3 mt-6">
+          <button onclick={prevStep} class="px-6 py-3 border border-wrs-border text-wrs-gray rounded font-semibold text-sm hover:border-wrs-pink transition-all">{i18n.t('book.back')}</button>
+          <button onclick={nextStep} disabled={!canProceed(2)}
+            class="px-6 py-3 bg-wrs-pink text-white rounded font-semibold text-sm hover:bg-wrs-pink-hover transition-all disabled:opacity-30 disabled:cursor-not-allowed">{i18n.t('book.continue')}</button>
         </div>
       </div>
     {/if}
 
-    <!-- Step 5: Confirmation -->
-    {#if step === 5}
-      <div class="text-center py-12">
-        <div class="text-5xl mb-6">🎉</div>
-        <h1 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-4">{i18n.t('book.confirmed')}</h1>
-        <p class="text-wrs-gray mb-2">{i18n.t('book.confirmedDesc')} <strong class="text-wrs-ink">{selectedDate}</strong> {i18n.t('book.at')} <strong class="text-wrs-ink">{selectedTime} HKT</strong>.</p>
-        <p class="text-wrs-gray text-sm mb-8">{i18n.t('book.confirmedSub')}</p>
-        <div class="p-4 bg-wrs-off-white rounded-lg mb-8 text-left text-sm">
-          <p class="text-wrs-ink font-semibold mb-3">{i18n.t('book.summary')}</p>
-          <div class="space-y-1.5 text-wrs-gray">
-            <p><span class="text-wrs-gray-light">{i18n.t('book.summaryService')}:</span> {services.find(s => s.value === service)?.label}</p>
-            <p><span class="text-wrs-gray-light">{i18n.t('book.summaryDate')}:</span> {selectedDate} {i18n.t('book.at')} {selectedTime} HKT</p>
-            <p><span class="text-wrs-gray-light">{i18n.t('book.summaryName')}:</span> {name}{company ? ` · ${company}` : ''}</p>
-            {#if phone}
-              <p><span class="text-wrs-gray-light">WhatsApp:</span> {countryCode} {phone}</p>
-            {/if}
-          </div>
-        </div>
-        <a href="/" class="text-wrs-pink font-semibold hover:underline">← {i18n.t('book.backHome')}</a>
-      </div>
-
-    {:else}
-      <!-- Header -->
-      <div class="text-center mb-10">
-        <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-3">{i18n.t('book.label')}</p>
-        <h1 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-3">{i18n.t('book.heading')}</h1>
-        <p class="text-wrs-gray">{i18n.t('book.subheading')}</p>
-      </div>
-
-      <!-- Step 1: Service selection -->
-      {#if step === 1}
-        <div class="space-y-3">
-          {#each services as svc}
-            <button onclick={() => { service = svc.value; nextStep(); }}
-              class="w-full text-left p-5 rounded-lg border-2 transition-all duration-200 hover:border-wrs-pink hover:bg-pink-50 cursor-pointer {service === svc.value ? 'border-wrs-pink bg-pink-50' : 'border-wrs-border'}">
-              <span class="text-wrs-ink font-semibold">{svc.label}</span>
-            </button>
-          {/each}
-        </div>
-      {/if}
-
-      <!-- Step 2: Needs -->
-      {#if step === 2}
-        <div>
-          <p class="text-sm text-wrs-gray mb-4">{i18n.t('book.needsLabel')}</p>
-          <textarea bind:value={needs} rows="4"
-            class="w-full px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all resize-y"
-            placeholder={i18n.t('book.needsPlaceholder')}></textarea>
-          <p class="text-xs text-wrs-gray-light mt-2" class:text-wrs-pink={needs.length >= 10}>{i18n.t('book.needsHint')} ({needs.length}/10)</p>
-          <div class="flex gap-3 mt-6">
-            <button onclick={prevStep} class="px-6 py-3 border border-wrs-border text-wrs-gray rounded font-semibold text-sm hover:border-wrs-pink transition-all">{i18n.t('book.back')}</button>
-            <button onclick={nextStep} disabled={!canProceed(2)}
-              class="px-6 py-3 bg-wrs-pink text-white rounded font-semibold text-sm hover:bg-wrs-pink-hover transition-all disabled:opacity-30 disabled:cursor-not-allowed">{i18n.t('book.continue')}</button>
-          </div>
-        </div>
-      {/if}
-
-      <!-- Step 3: Time slot -->
-      {#if step === 3}
-        <div>
-          <p class="text-sm text-wrs-gray mb-4">{i18n.t('book.timeLabel')}</p>
-          <div class="space-y-8">
-            {#each timeSlots as day}
-              <div>
-                <p class="text-xs text-wrs-gray-light uppercase tracking-wide mb-3 font-semibold">{day.label}</p>
-                <div class="grid grid-cols-2 gap-2">
-                  {#each day.slots as slot}
-                    <button onclick={() => { selectedDate = day.date; selectedTime = slot.time; }}
-                      class="p-3 rounded-lg border-2 text-sm font-medium transition-all duration-150 text-center cursor-pointer {selectedDate === day.date && selectedTime === slot.time ? 'border-wrs-pink bg-pink-50 text-wrs-pink' : 'border-wrs-border text-wrs-ink'} hover:border-wrs-pink">{slot.label}</button>
-                  {/each}
-                </div>
-              </div>
-            {/each}
-          </div>
-          <div class="flex gap-3 mt-6">
-            <button onclick={prevStep} class="px-6 py-3 border border-wrs-border text-wrs-gray rounded font-semibold text-sm hover:border-wrs-pink transition-all">{i18n.t('book.back')}</button>
-            <button onclick={nextStep} disabled={!canProceed(3)}
-              class="px-6 py-3 bg-wrs-pink text-white rounded font-semibold text-sm hover:bg-wrs-pink-hover transition-all disabled:opacity-30 disabled:cursor-not-allowed">{i18n.t('book.continue')}</button>
-          </div>
-        </div>
-      {/if}
-
-      <!-- Step 4: Details -->
-      {#if step === 4}
-        <div>
-          <div class="space-y-4">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.nameLabel')} *</label>
-                <input bind:value={name} type="text" required
-                  class="w-full px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all"
-                  placeholder={i18n.t('book.namePlaceholder')} />
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.emailLabel')} *</label>
-                <input bind:value={email} type="email" required
-                  class="w-full px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all"
-                  placeholder={i18n.t('book.emailPlaceholder')} />
-              </div>
-            </div>
+    <!-- Step 3: Details -->
+    {#if step === 3}
+      <div>
+        <div class="space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.companyLabel')}</label>
-              <input bind:value={company} type="text"
+              <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.nameLabel')} *</label>
+              <input bind:value={name} type="text" required
                 class="w-full px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all"
-                placeholder={i18n.t('book.companyPlaceholder')} />
+                placeholder={i18n.t('book.namePlaceholder')} />
             </div>
             <div>
-              <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.phoneLabel')}</label>
-              <div class="flex gap-2">
-                <select bind:value={countryCode}
-                  class="px-3 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink text-sm focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all appearance-none cursor-pointer"
-                  style="min-width:120px;">
-                  {#each countryCodes as cc}
-                    <option value={cc.code}>{cc.label}</option>
-                  {/each}
-                </select>
-                <input bind:value={phone} type="tel"
-                  class="flex-1 px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all"
-                  placeholder={i18n.t('book.phonePlaceholder')} />
-              </div>
+              <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.emailLabel')} *</label>
+              <input bind:value={email} type="email" required
+                class="w-full px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all"
+                placeholder={i18n.t('book.emailPlaceholder')} />
             </div>
-
-            <!-- Booking summary -->
-            <div class="p-4 bg-wrs-off-white rounded-lg text-sm">
-              <p class="text-wrs-ink font-semibold mb-2">{i18n.t('book.bookingSummary')}</p>
-              <p class="text-wrs-gray"><span class="text-wrs-gray-light">{i18n.t('book.summaryService')}:</span> {services.find(s => s.value === service)?.label}</p>
-              {#if selectedSlot}
-                <p class="text-wrs-gray"><span class="text-wrs-gray-light">{i18n.t('book.summaryDate')}:</span> {selectedSlot.label}</p>
-              {/if}
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.companyLabel')}</label>
+            <input bind:value={company} type="text"
+              class="w-full px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all"
+              placeholder={i18n.t('book.companyPlaceholder')} />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-wrs-ink mb-2">{i18n.t('book.phoneLabel')}</label>
+            <div class="flex gap-2">
+              <select bind:value={countryCode}
+                class="px-3 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink text-sm focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all appearance-none cursor-pointer"
+                style="min-width:120px;">
+                {#each countryCodes as cc}
+                  <option value={cc.code}>{cc.label}</option>
+                {/each}
+              </select>
+              <input bind:value={phone} type="tel"
+                class="flex-1 px-4 py-3 rounded-lg border border-wrs-border bg-white text-wrs-ink placeholder:text-wrs-gray-light focus:outline-none focus:border-wrs-pink focus:ring-2 focus:ring-wrs-pink/10 transition-all"
+                placeholder={i18n.t('book.phonePlaceholder')} />
             </div>
+          </div>
 
-            {#if status === 'error'}
-              <div class="p-4 rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm">{errorMsg}</div>
-            {/if}
+          <!-- Booking summary -->
+          <div class="p-4 bg-wrs-off-white rounded-lg text-sm">
+            <p class="text-wrs-ink font-semibold mb-2">{i18n.t('book.bookingSummary')}</p>
+            <p class="text-wrs-gray"><span class="text-wrs-gray-light">{i18n.t('book.summaryService')}:</span> {services.find(s => s.value === service)?.label}</p>
           </div>
-          <div class="flex gap-3 mt-6">
-            <button onclick={prevStep} class="px-6 py-3 border border-wrs-border text-wrs-gray rounded font-semibold text-sm hover:border-wrs-pink transition-all">{i18n.t('book.back')}</button>
-            <button onclick={handleSubmit} disabled={status === 'sending' || !canProceed(4)}
-              class="flex-1 px-6 py-4 bg-wrs-pink text-white rounded font-semibold text-base hover:bg-wrs-pink-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed">
-              {status === 'sending' ? i18n.t('book.booking') : i18n.t('book.confirmBooking')}
-            </button>
-          </div>
-          <p class="text-xs text-wrs-gray-light text-center mt-4">{i18n.t('book.recaptcha')}</p>
+
+          {#if status === 'error'}
+            <div class="p-4 rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm">{errorMsg}</div>
+          {/if}
         </div>
-      {/if}
+        <div class="flex gap-3 mt-6">
+          <button onclick={prevStep} class="px-6 py-3 border border-wrs-border text-wrs-gray rounded font-semibold text-sm hover:border-wrs-pink transition-all">{i18n.t('book.back')}</button>
+          <button onclick={handleSubmit} disabled={status === 'sending' || !canProceed(3)}
+            class="flex-1 px-6 py-4 bg-wrs-pink text-white rounded font-semibold text-base hover:bg-wrs-pink-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+            {status === 'sending' ? i18n.t('book.redirecting') : i18n.t('book.confirmBooking')}
+          </button>
+        </div>
+        <p class="text-xs text-wrs-gray-light text-center mt-4">{i18n.t('book.recaptcha')}</p>
+      </div>
     {/if}
   </div>
 </section>

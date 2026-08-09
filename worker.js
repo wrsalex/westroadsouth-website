@@ -25,13 +25,11 @@ export default {
         let tgMsg = '';
 
         if (data.type === 'booking') {
-          // Booking notification
+          // Booking notification (user redirected to Cal.com for time selection)
           const name = (data.name || '—').trim();
           const email = (data.email || '—').trim();
           const company = (data.company || '').trim();
           const service = (data.service || '—').trim();
-          const date = (data.date || '—').trim();
-          const time = (data.time || '—').trim();
           const needs = (data.needs || '—').trim();
           const countryCode = (data.countryCode || '').trim();
           const phone = (data.phone || '').trim();
@@ -53,24 +51,43 @@ export default {
             company ? '<b>Company:</b> ' + esc(company) : '',
             (countryCode && phone) ? '<b>WhatsApp:</b> ' + esc(countryCode) + ' ' + esc(phone) : '',
             '',
-            '<b>\u{1F4C5} Date & Time:</b> ' + esc(date) + ' at ' + esc(time) + ' HKT',
+            '<b>📅 Scheduling:</b> Redirected to Cal.com for time selection',
             '',
             '<b>Needs:</b>',
             esc(needs),
             '',
-            '<i>via westroadsouth.com/book</i>'
+            '<i>via westroadsouth.com/book → cal.com/westroadsouth/30min</i>'
           ].filter(Boolean).join('\n');
         } else if (data.type === 'scorecard') {
           // Scorecard submission
           const email = (data.email || '—').trim();
           const totalScore = data.totalScore || 0;
           const tier = (data.tier || '—').trim();
+          const answers = data.answers || '{}';
+          const answersText = data.answersText || '{}';
+
+          const qLabels = ['Strategy', 'Process Maturity', 'Data Readiness', 'Technology', 'Team & Skills', 'Budget & ROI', 'Timeline'];
+          let answerLines = '';
+          try {
+            const parsed = typeof answers === 'string' ? JSON.parse(answers) : answers;
+            const textParsed = typeof answersText === 'string' ? JSON.parse(answersText) : answersText;
+            answerLines = Object.entries(parsed).map(([k, v]) => {
+              const idx = parseInt(k.replace('q', '')) || 0;
+              const label = qLabels[idx] || k;
+              const selectedText = textParsed[k] || '';
+              return '<b>Q' + (idx + 1) + ' ' + esc(label) + ':</b> ' + v + '/3 — ' + esc(selectedText);
+            }).join('\n');
+          } catch (e) {
+            answerLines = esc(String(answers));
+          }
 
           tgMsg = [
             '\u{1F4CA} <b>New Scorecard Submission</b>',
             '',
             '<b>Email:</b> ' + esc(email),
             '<b>Score:</b> ' + totalScore + '/21 — ' + esc(tier),
+            '',
+            answerLines,
             '',
             '<i>via westroadsouth.com/scorecard</i>'
           ].filter(Boolean).join('\n');
@@ -95,7 +112,7 @@ export default {
           ].filter(Boolean).join('\n');
         }
 
-        await fetch('https://api.telegram.org/bot216838030:AAGtTnDOpVIxoDy6gZJh896jUi_ZnkC7fr4/sendMessage', {
+        await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ chat_id: '36390631', text: tgMsg, parse_mode: 'HTML' })

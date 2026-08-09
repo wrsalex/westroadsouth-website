@@ -5,6 +5,7 @@
 
   let step = $state<'quiz' | 'results' | 'report'>('quiz');
   let scores = $state<Record<string, number>>({});
+  let selectedTexts = $state<Record<string, string>>({});
   let totalScore = $state(0);
   let email = $state('');
   let status = $state<'idle' | 'sending' | 'error'>('idle');
@@ -16,7 +17,7 @@
     opts: q.opts.map((t: string, oi: number) => ({ v: 3 - oi, t }))
   })));
 
-  function selectAnswer(qId: string, value: number) { scores[qId] = value; }
+  function selectAnswer(qId: string, value: number, text: string) { scores[qId] = value; selectedTexts[qId] = text; }
   function allAnswered() { return questions.every(q => scores[q.id] !== undefined); }
 
   function calcScore() {
@@ -71,7 +72,8 @@
       body: JSON.stringify({
         type: 'scorecard', email, totalScore,
         tier: tierLabels[tierIdx(totalScore)],
-        answers: JSON.stringify(scores)
+        answers: JSON.stringify(scores),
+        answersText: JSON.stringify(selectedTexts)
       })
     }).catch(() => {});
     status = 'idle';
@@ -125,7 +127,7 @@
             <p class="text-wrs-ink font-semibold mb-3 text-sm">{qi + 1}. {q.q}</p>
             <div class="space-y-2">
               {#each q.opts as opt}
-                <button onclick={() => selectAnswer(q.id, opt.v)}
+                <button onclick={() => selectAnswer(q.id, opt.v, opt.t)}
                   class="w-full text-left p-3 rounded-lg border text-sm transition-all cursor-pointer {scores[q.id] === opt.v ? 'border-wrs-pink bg-pink-50 text-wrs-ink font-medium' : 'border-wrs-border text-wrs-gray hover:border-wrs-pink/50'}"
                 >{opt.t}</button>
               {/each}
