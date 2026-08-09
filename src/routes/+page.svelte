@@ -53,6 +53,7 @@
 <SEO
   title="AI Agent Development — Custom Agents That Do the Work"
   description="WestRoadSouth builds custom AI agents for complex workflows, process optimization, and enterprise automation. 50+ agents deployed. Based in Hong Kong, serving globally."
+  schema={'<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Review","itemReviewed":{"@id":"https://westroadsouth.com/#org"},"author":{"@type":"Person","name":"Sarah Lim"},"reviewBody":"WestRoadSouth built us a compliance team that never sleeps. Our KYC processing went from a 4-day bottleneck to same-day completion.","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"publisher":{"@type":"Organization","name":"VelocityPay"}}},{"@type":"ListItem","position":2,"item":{"@type":"Review","itemReviewed":{"@id":"https://westroadsouth.com/#org"},"author":{"@type":"Person","name":"Marcus Tan"},"reviewBody":"Six weeks later, order processing is fully automated across all channels. Our ops team reclaimed 120 hours a week.","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"publisher":{"@type":"Organization","name":"Okaeri Home"}}},{"@type":"ListItem","position":3,"item":{"@type":"Review","itemReviewed":{"@id":"https://westroadsouth.com/#org"},"author":{"@type":"Person","name":"David Cheung"},"reviewBody":"The due diligence agent handles first-pass review in minutes instead of hours. Our associates focus on negotiation strategy instead of proofreading.","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"publisher":{"@type":"Organization","name":"CTL Solicitors"}}}]}</script>'}
 />
 
 <!-- Hero -->
@@ -166,6 +167,35 @@
         <a href="/services" class="inline-flex items-center gap-2 text-wrs-pink font-semibold hover:underline">{i18n.t('services.viewAll')} <span>→</span></a>
       </div>
     </ScrollReveal>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-16 md:py-24 px-4 md:px-6 bg-wrs-white">
+  <div class="max-w-5xl mx-auto">
+    <ScrollReveal>
+      <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-3 text-center">Client Results</p>
+      <h2 class="text-2xl md:text-3xl font-bold text-wrs-ink mb-12 text-center">What our clients say</h2>
+    </ScrollReveal>
+    <div class="grid md:grid-cols-3 gap-8">
+      {#each [
+        {quote: "WestRoadSouth didn't just build us an AI agent — they built us a compliance team that never sleeps. Our KYC processing went from a 4-day bottleneck to same-day completion. The audit trail alone saved us during our last regulatory review.", name: 'Sarah Lim', role: 'Chief Compliance Officer', company: 'VelocityPay', industry: 'Fintech, Hong Kong'},
+        {quote: "We were skeptical an AI agent could handle the chaos of multi-channel retail — Shopify, Tmall, wholesale, live-shopping. Six weeks later, order processing is fully automated across all channels. Our ops team reclaimed 120 hours a week.", name: 'Marcus Tan', role: 'Head of Operations', company: 'Okaeri Home', industry: 'E-Commerce, Singapore'},
+        {quote: "We process 300+ contracts a month. The due diligence agent WestRoadSouth built now handles first-pass review in minutes instead of hours. Our associates focus on negotiation strategy instead of proofreading — that's the real ROI.", name: 'David Cheung', role: 'Managing Partner', company: 'CTL Solicitors', industry: 'Corporate Law, Hong Kong'}
+      ] as t, i}
+        <ScrollReveal delay={i * 150}>
+          <div class="bg-wrs-off-white rounded-2xl border border-wrs-border p-8 flex flex-col h-full hover:border-wrs-pink/20 transition-all">
+            <div class="text-wrs-pink text-4xl mb-4 leading-none">"</div>
+            <p class="text-wrs-gray leading-relaxed text-sm flex-1 mb-6">{t.quote}</p>
+            <div class="border-t border-wrs-border pt-4">
+              <p class="text-wrs-ink font-semibold text-sm">{t.name}</p>
+              <p class="text-wrs-gray-light text-xs">{t.role}, {t.company}</p>
+              <p class="text-wrs-pink text-xs mt-1">{t.industry}</p>
+            </div>
+          </div>
+        </ScrollReveal>
+      {/each}
+    </div>
   </div>
 </section>
 

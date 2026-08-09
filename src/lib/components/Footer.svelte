@@ -19,6 +19,9 @@
           <a href="/services" class="block text-sm text-gray-400 hover:text-wrs-pink transition-colors">{i18n.t('footer.aiInfra')}</a>
           <a href="/sme-automation" class="block text-sm text-gray-400 hover:text-wrs-pink transition-colors">{i18n.t('footer.smeAuto')}</a>
           <a href="/logistics-ai" class="block text-sm text-gray-400 hover:text-wrs-pink transition-colors">Logistics AI</a>
+          <a href="/finance-ai" class="block text-sm text-gray-400 hover:text-wrs-pink transition-colors">Finance AI</a>
+          <a href="/retail-ai" class="block text-sm text-gray-400 hover:text-wrs-pink transition-colors">Retail AI</a>
+          <a href="/legal-ai" class="block text-sm text-gray-400 hover:text-wrs-pink transition-colors">Legal AI</a>
         </div>
       </div>
       <div>

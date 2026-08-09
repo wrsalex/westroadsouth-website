@@ -181,4 +181,95 @@
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/terms?lang=sc" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/terms" />
   </url>
+  <url>
+    <loc>https://westroadsouth.com/finance-ai</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/finance-ai" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/finance-ai?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/finance-ai?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/finance-ai" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/retail-ai</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/retail-ai" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/retail-ai?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/retail-ai?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/retail-ai" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/legal-ai</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/legal-ai" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/legal-ai?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/legal-ai?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/legal-ai" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/blog/what-is-an-ai-agent</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/blog/what-is-an-ai-agent" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/blog/what-is-an-ai-agent?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/blog/what-is-an-ai-agent?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/blog/what-is-an-ai-agent" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/blog/automate-vs-build-custom</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/blog/automate-vs-build-custom" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/blog/automate-vs-build-custom?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/blog/automate-vs-build-custom?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/blog/automate-vs-build-custom" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/blog/measuring-ai-roi</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/blog/measuring-ai-roi" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/blog/measuring-ai-roi?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/blog/measuring-ai-roi?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/blog/measuring-ai-roi" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/blog/lessons-50-production-agents</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/blog/lessons-50-production-agents" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/blog/lessons-50-production-agents?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/blog/lessons-50-production-agents?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/blog/lessons-50-production-agents" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/blog/open-sourcing-acrn</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/blog/open-sourcing-acrn" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/blog/open-sourcing-acrn?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/blog/open-sourcing-acrn?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/blog/open-sourcing-acrn" />
+  </url>
+  <url>
+    <loc>https://westroadsouth.com/blog/multilingual-ai-agents</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://westroadsouth.com/blog/multilingual-ai-agents" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://westroadsouth.com/blog/multilingual-ai-agents?lang=tc" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://westroadsouth.com/blog/multilingual-ai-agents?lang=sc" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://westroadsouth.com/blog/multilingual-ai-agents" />
+  </url>
+
 </urlset>
