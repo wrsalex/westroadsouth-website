@@ -27,6 +27,7 @@
 <SEO
   title="Research Vault — Autonomous AI Research Engine & Knowledge Graph"
   description="From idea to structured knowledge graph in minutes. Autonomous multi-phase research that turns weeks of market analysis into decision-ready intelligence."
+  ogImage="https://westroadsouth.com/images/og-researchvault.png"
   schema={'<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Research Vault","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Autonomous AI research engine that builds structured knowledge graphs from a single topic — turns weeks of market analysis into decision-ready intelligence.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@id":"https://westroadsouth.com/#org"}}</script>'}
 />
 

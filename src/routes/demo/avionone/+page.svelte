@@ -43,6 +43,7 @@
 <SEO
   title="AvionOne — Always-On AI Companion for iPhone with Persistent Memory"
   description="Your iPhone has an AI. Speech recognition, TTS, visualizer, and persistent memory. Built on ACRN Engine + Ascend memory architecture. See the interactive demo."
+  ogImage="https://westroadsouth.com/images/og-avionone.png"
   schema={'<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AvionOne","applicationCategory":"LifestyleApplication","operatingSystem":"iOS","description":"Always-on AI companion for iPhone — speech recognition, TTS, living visualizer, and persistent memory with HYOK architecture.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@id":"https://westroadsouth.com/#org"}}</script>'}
 />
 

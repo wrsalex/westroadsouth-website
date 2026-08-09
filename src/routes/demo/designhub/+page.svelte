@@ -29,6 +29,7 @@
 <SEO
   title="DesignHub v2 — AI-Powered Figma to SwiftUI Code Generation"
   description="Convert Figma mockups to production SwiftUI code in minutes — not days. Pixel-perfect, HIG-compliant, multi-platform. Interactive demo available."
+  ogImage="https://westroadsouth.com/images/og-designhub.png"
   schema={'<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"DesignHub v2","applicationCategory":"DeveloperApplication","operatingSystem":"Web, macOS","description":"AI-powered Figma to SwiftUI code generation — converts design mockups to production-ready iOS code in minutes.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@id":"https://westroadsouth.com/#org"}}</script>'}
 />
 
