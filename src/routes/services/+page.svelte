@@ -15,8 +15,8 @@
   <div class="max-w-4xl mx-auto text-center">
     <ScrollReveal>
       <p class="text-wrs-pink text-sm font-semibold uppercase tracking-widest mb-4">{i18n.t('servicesPage.title')}</p>
-      <h1 class="text-3xl md:text-5xl font-bold text-wrs-ink mb-6">{i18n.t('servicesPage.subtitle')}</h1>
-      <p class="text-lg text-wrs-gray max-w-2xl mx-auto leading-relaxed">{i18n.t('servicesPage.desc')}</p>
+      <h1 class="text-3xl md:text-5xl font-bold text-wrs-ink mb-6 speakable-heading">{i18n.t('servicesPage.subtitle')}</h1>
+      <p class="text-lg text-wrs-gray max-w-2xl mx-auto leading-relaxed speakable-summary">{i18n.t('servicesPage.desc')}</p>
     </ScrollReveal>
   </div>
 </section>

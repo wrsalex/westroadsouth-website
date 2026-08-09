@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://westroadsouth.com/sitemap.xml
+
+Disallow: /api/
